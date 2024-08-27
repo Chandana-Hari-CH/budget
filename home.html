@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<!-- google fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+</head>
+<>
+    <style>
+        body{
+            background-color: rgb(147, 254, 154);
+        }
+     
+
+.balance-box {
+    border: 2px solid rgb(0, 0, 0);
+    padding: 2rem;
+    background-color: rgb(96, 186, 123);
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.balance-box h4 {
+    margin: 0;
+}
+
+.table {
+    width: fit-content;
+    border-collapse: collapse; /* Ensures borders are collapsed */
+}
+
+.table th, .table td {
+    border: 1px solid #ddd; /* Adds a light border */
+    padding: 0.5rem 1rem; /* Adjusts padding */
+    text-align: left;
+}
+
+.table thead th {
+    background-color: rgb(149, 183, 198); /* Background color for header */
+    font-weight: bold; /* Makes header text bold */
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Zebra striping for rows */
+}
+
+    </style>
+    <div class="head d-flex align-items-center justify-content-center mt-4 ">
+        <h1 id="uid"style="font-family: Nerko One, cursive;" class="mx-4"><i class="fa-solid fa-user fa-bounce" style="color: #25745c; "></i>Welcome</h1>
+        <button style="margin-left: 71rem;" class="btn btn1 btn-outline-danger " onclick="window.location.href='./index.html'">Logout</button>
+    
+    </div><hr style="height: 5px; border: none; background-color: black;">
+
+    <div style="gap: 1rem;" class="box-container d-flex justify-content-center align-items-center height:100vh">
+            <div class="balance-box">
+                <h4 class="text-center">Total Balance</h4>
+                <h4 id="totalincome" class="text-center mt-3">Rs 0/-</h4>
+            </div>
+        
+            <div class="balance-box">
+                <h4 class="text-center">Total Expense</h4>
+                <h4 id="totalexpense" class="text-center mt-3">Rs 0/-</h4>
+            </div>
+        </div>
+
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col text-center">
+                <h2 style="font-family: Nerko One, cursive; color:rgb(1, 7, 163);">Add Income</h2> <hr>
+            </div>
+            <div class="col text-center">
+                <h2 style="font-family: Nerko One, cursive; color: red;">Add Expense</h2> <hr>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <form action="" id="incomeform">
+                    <div class="mb-3">
+                        <input id="type" class="form-control" type="text" placeholder="Enter income type">
+                    </div>
+                    <div class="mb-3">
+                        <input id="inamt" class="form-control" type="text" placeholder="Enter Amount">
+                    </div>
+                    <button type="button" class="btn btn-success w-100" onclick="addIncome()">Add Income</button>
+                </form>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <form action="" id="expenseform">
+                    <div class="mb-3">
+                        <input id="exptype" class="form-control" type="text" placeholder="Enter Expense type">
+                    </div>
+                    <div class="mb-3">
+                        <input id="expamnt" class="form-control" type="text" placeholder="Enter Amount">
+                    </div>
+                    <button type="button" class="btn btn-warning w-100" onclick="addExpense()">Add Expense</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" onclick="clearAll()" style="margin-left: 45rem; margin-top: 2rem;" class="btn btn-danger ">Clear All</button>
+    
+    <h2 style="font-family: Nerko One, cursive;" class="text-center mt-4">Income and Expense Details</h2><hr>
+    <div class="details d-flex align-items-start justify-content-center">
+        <div class="incomeDetails">
+            <h3 style="font-family: Nerko One, cursive; color:rgb(1, 7, 163);">Income</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="incometable">
+                    <!-- Rows will be added here dynamically -->
+                </tbody>
+            </table>
+            
+        </div>
+        <div class="expenseDetails ms-4">
+            <h3 style="font-family: Nerko One, cursive; color: red;">Expense</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="expensetable">
+                    <!-- Rows will be added here dynamically -->
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+    
+ </body>
+<script src="./script.js">
+  
+</script>
+</html>

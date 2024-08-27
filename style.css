@@ -1,0 +1,11 @@
+body{
+ background-color: rgb(147, 254, 154);
+}
+hr{
+    margin-left: 100px;
+    margin-right: 100px;
+    color: purple;
+    height: 5px;
+    
+    
+}
